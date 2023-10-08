@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, NgxsOnInit, State, StateContext } from "@ngxs/store";
+import { Action, NgxsOnInit, Selector, State, StateContext } from "@ngxs/store";
 import { Person } from "../models/interfaces/person";
 import { StoreModel } from "../models/interfaces/store-model";
 import { SwapiHttpService } from "../services/swapi-http.service";
@@ -33,6 +33,11 @@ export class FetchPeoplePrevious {
 })
 @Injectable()
 export class PeopleStore implements NgxsOnInit {
+
+  @Selector()
+  static currentPage(state: PeopleStoreModel): Person[] {
+    return state.currentPage;
+  }
 
   constructor(
     private swapiHttpService: SwapiHttpService,

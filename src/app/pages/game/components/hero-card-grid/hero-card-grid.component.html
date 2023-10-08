@@ -1,0 +1,9 @@
+<section>
+  <ng-container *ngIf="peopleCurrentPage$ | async as people">
+    <div class="row">
+      <div *ngFor="let person of people" class="col-2 p-2">
+        <app-hero-card [person]="person"></app-hero-card>
+      </div>
+    </div>
+  </ng-container>
+</section>
