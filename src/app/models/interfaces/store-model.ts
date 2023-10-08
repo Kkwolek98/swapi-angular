@@ -5,6 +5,6 @@ export interface StoreModel<T extends Person | Starship> {
   allResults: T[];
   currentPage: T[];
   count: number;
-  next?: string;
-  previous?: string;
+  next: string | null;
+  previous: string | null;
 }

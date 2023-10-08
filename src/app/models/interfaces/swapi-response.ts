@@ -3,7 +3,7 @@ import { Starship } from "./starship";
 
 export interface SwapiResponse<T extends Person | Starship> {
   count: number;
-  next?: string;
-  previous?: string;
+  next: string | null;
+  previous: string | null;
   results: T[];
 }
