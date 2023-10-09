@@ -53,6 +53,7 @@ export class PeopleStore implements NgxsOnInit {
   fetchPeople(ctx: StateContext<PeopleStoreModel>) {
     return this.swapiHttpService.getAllPeople$().pipe(
       tap((res) => {
+        res.results.forEach((el) => el.power = +el.mass);
         this.patchState(ctx, res);
       })
     );
