@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'game',
     pathMatch: 'full'
-  }
+  },
+  // {
+  //   path: '*',
+  //   component: Error404 // TODO: Error 404 page
+  // }
 ];
 
 @NgModule({

@@ -24,7 +24,7 @@ import { PeopleStore } from './stores/people.store';
       [
         PeopleStore
       ]
-    )
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,34 @@
-<mat-card>
+<mat-card class="h-100 pb-2">
   <mat-card-header>
     <mat-card-title> {{ person.name }} </mat-card-title>
     <mat-card-subtitle> {{ person.mass }} </mat-card-subtitle>
   </mat-card-header>
+  <ng-container *ngIf="!limited">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6 fw-bold">Gender:</div>
+        <div class="col-6 text-end">{{ person.gender }}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 fw-bold">Birth year:</div>
+        <div class="col-6 text-end">{{ person.birth_year }}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 fw-bold">Height:</div>
+        <div class="col-6 text-end">{{ person.height }}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 fw-bold">Eye color:</div>
+        <div class="col-6 text-end">{{ person.eye_color }}</div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        class="w-100"
+        [disabled]="isCpu || (playerCard$ | async)"
+        (click)="drawCard()"
+      >Draw</button>
+    </mat-card-actions>
+  </ng-container>
 </mat-card>
