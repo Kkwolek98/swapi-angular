@@ -1,7 +1,7 @@
 <main>
   <app-title>SW Game</app-title>
   <section>
-    <div class="row" *ngIf="(isGameStarted$ | async) else notStarted">
+    <div class="row" *ngIf="isGameStarted$ | async; else notStarted">
       <div class="col-5 row">
         <div class="col-10">
           <app-title>Player</app-title>
@@ -17,19 +17,30 @@
         <div class="row">
           <div class="col-12 text-center">
             <button
-              *ngIf="(playerDeck$ | async)?.length else notStarted"
+              *ngIf="(playerDeck$ | async)?.length; else notStarted"
               mat-button
               (click)="nextRound()"
+              data-testid="nextRoundBtn"
             >
               Next round
             </button>
-
           </div>
-          <div *ngIf="(playerCard$ | async) as playerCard" class="col-6 p-2">
-            <app-hero-card [person]="playerCard" [limited]="true"></app-hero-card>
+          <div
+            *ngIf="playerCard$ | async as playerCard"
+            class="col-6 p-2"
+            data-testid="drawnPlayerCard"
+          >
+            <app-hero-card
+              [person]="playerCard"
+              [limited]="true"
+            ></app-hero-card>
           </div>
-          <div *ngIf="(cpuCard$ | async) as cpuCard" class="col-6 p-2">
-            <app-hero-card [person]="cpuCard"  [limited]="true"></app-hero-card>
+          <div
+            *ngIf="cpuCard$ | async as cpuCard"
+            class="col-6 p-2"
+            data-testid="drawnCpuCard"
+          >
+            <app-hero-card [person]="cpuCard" [limited]="true"></app-hero-card>
           </div>
         </div>
       </div>
@@ -48,18 +59,16 @@
   </section>
 </main>
 
-
 <ng-template #notStarted>
-  <div
-    *ngIf="{ people: (people$ | async) } as cards"
-    class="row text-center"
-  >
+  <div *ngIf="{ people: (people$ | async) } as cards" class="row text-center">
     <div class="col-6">
       <button
-        *ngIf="cards.people?.length else spinner"
+        *ngIf="cards.people?.length; else spinner"
         mat-button
         (click)="startGame(cards.people!)"
-      >Play as people</button>
+      >
+        Play as people
+      </button>
     </div>
     <div class="col-6">
       <button mat-button>Play as starships</button>
@@ -68,5 +77,5 @@
 </ng-template>
 
 <ng-template #spinner>
-    <mat-spinner [diameter]="32" class="mx-auto"></mat-spinner>
+  <mat-spinner [diameter]="32" class="mx-auto"></mat-spinner>
 </ng-template>
