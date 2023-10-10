@@ -27,4 +27,11 @@ describe('Game page', () => {
     cy.get('[data-testid="drawnCpuCard"]');
     cy.get('[data-testid="drawnPlayerCard"]');
   });
+
+  it('Should use all cards', () => {
+    cy.contains('Play as people', { timeout: 30000 }).click();
+
+
+    cy.contains('Draw').click();
+  });
 });

@@ -1,13 +1,7 @@
 <section>
-  <ng-container *ngIf="(isCpu ? cpuDeck$ : playerDeck$ )| async as people">
-    <div
-      class="row"
-      [class.flex-row-reverse]="isCpu"
-    >
-      <div
-        *ngFor="let person of people"
-        class="col-12 col-lg-6 col-xl-4 p-2"
-      >
+  <ng-container *ngIf="(isCpu ? cpuDeck$ : playerDeck$) | async as people">
+    <div class="row" [class.flex-row-reverse]="isCpu">
+      <div *ngFor="let person of people" class="col-12 col-lg-6 col-xl-4 p-2">
         <app-hero-card [person]="person" [isCpu]="isCpu"></app-hero-card>
       </div>
     </div>

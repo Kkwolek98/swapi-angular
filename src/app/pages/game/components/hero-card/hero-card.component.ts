@@ -19,6 +19,6 @@ export class HeroCardComponent {
   constructor(private store: Store) { }
 
   public drawCard() {
-    this.store.dispatch(new GameDrawCard(this.person)).subscribe((winner) => console.log(winner));
+    this.store.dispatch(new GameDrawCard(this.person));
   }
 }

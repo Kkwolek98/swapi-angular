@@ -1,4 +1,9 @@
-<mat-card class="h-100 pb-2">
+<mat-card
+  class="h-100 pb-2"
+  [attr.data-testid]="
+    'card' + (isCpu ? 'Cpu' : 'Player') + (limited ? 'Limited' : 'Detailed')
+  "
+>
   <mat-card-header>
     <mat-card-title> {{ person.name }} </mat-card-title>
     <mat-card-subtitle> {{ person.mass }} </mat-card-subtitle>
@@ -28,7 +33,9 @@
         class="w-100"
         [disabled]="isCpu || (playerCard$ | async)"
         (click)="drawCard()"
-      >Draw</button>
+      >
+        Draw
+      </button>
     </mat-card-actions>
   </ng-container>
 </mat-card>
