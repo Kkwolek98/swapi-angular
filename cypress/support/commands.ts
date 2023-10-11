@@ -3,15 +3,6 @@
 // with Intellisense and code completion in your
 // IDE or Text Editor.
 // ***********************************************
-// declare namespace Cypress {
-//   interface Chainable<Subject = any> {
-//     customCommand(param: any): typeof customCommand;
-//   }
-// }
-//
-// function customCommand(param: any): void {
-//   console.warn(param);
-// }
 //
 // NOTE: You can use it like so:
 // Cypress.Commands.add('customCommand', customCommand);
@@ -41,3 +32,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    getByTestId(testId: string): typeof getByTestId;
+  }
+}
+
+function getByTestId(subject: any, testId: string): Cypress.Chainable<any> {
+  if (subject) {
+    return cy.wrap(subject).find(`[data-testid="${testId}"]`)
+  }
+  return cy.get(`[data-testid="${testId}"]`)
+}
+
+Cypress.Commands.add(
+  'getByTestId',
+  { prevSubject: 'optional' },
+  getByTestId
+);
