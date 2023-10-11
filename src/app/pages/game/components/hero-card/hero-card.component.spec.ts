@@ -4,9 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { Store, NgxsModule } from '@ngxs/store';
 import { GameDrawCard, GameStore } from '../../../../stores/game.store';
 import { Person } from 'src/app/models/interfaces/person';
-import { Observable, of } from 'rxjs';
 
-fdescribe('HeroCardComponent', () => {
+describe('HeroCardComponent', () => {
   let component: HeroCardComponent;
   let fixture: ComponentFixture<HeroCardComponent>;
   let store: Store;

@@ -29,6 +29,9 @@
             *ngIf="playerCard$ | async as playerCard"
             class="col-6 p-2"
             data-testid="drawnPlayerCard"
+            [ngClass]="{
+              'border border-5 border-white': (winner$ | async) === 'player'
+            }"
           >
             <app-hero-card
               [person]="playerCard"
@@ -39,6 +42,9 @@
             *ngIf="cpuCard$ | async as cpuCard"
             class="col-6 p-2"
             data-testid="drawnCpuCard"
+            [ngClass]="{
+              'border border-5 border-white': (winner$ | async) === 'cpu'
+            }"
           >
             <app-hero-card [person]="cpuCard" [limited]="true"></app-hero-card>
           </div>
@@ -71,7 +77,8 @@
       </button>
     </div>
     <div class="col-6">
-      <button mat-button>Play as starships</button>
+      <button mat-button [disabled]="true">Play as starships</button>
+      <!-- TODO: Playing as starships -->
     </div>
   </div>
 </ng-template>
