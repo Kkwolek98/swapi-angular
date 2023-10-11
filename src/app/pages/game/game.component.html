@@ -34,7 +34,7 @@
             }"
           >
             <app-hero-card
-              [person]="playerCard"
+              [entity]="playerCard"
               [limited]="true"
             ></app-hero-card>
           </div>
@@ -46,7 +46,7 @@
               'border border-5 border-white': (winner$ | async) === 'cpu'
             }"
           >
-            <app-hero-card [person]="cpuCard" [limited]="true"></app-hero-card>
+            <app-hero-card [entity]="cpuCard" [limited]="true"></app-hero-card>
           </div>
         </div>
       </div>
@@ -66,7 +66,13 @@
 </main>
 
 <ng-template #notStarted>
-  <div *ngIf="{ people: (people$ | async) } as cards" class="row text-center">
+  <div
+    *ngIf="{
+      people: (people$ | async),
+      starships: (starships$ | async)
+    } as cards"
+    class="row text-center"
+  >
     <div class="col-6">
       <button
         *ngIf="cards.people?.length; else spinner"
@@ -77,8 +83,13 @@
       </button>
     </div>
     <div class="col-6">
-      <button mat-button [disabled]="true">Play as starships</button>
-      <!-- TODO: Playing as starships -->
+      <button
+        *ngIf="cards.starships?.length; else spinner"
+        mat-button
+        (click)="startGame(cards.starships!)"
+      >
+        Play as starships
+      </button>
     </div>
   </div>
 </ng-template>

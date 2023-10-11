@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxsModule } from '@ngxs/store';
 import { GameStore } from '../../stores/game.store';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PersonCardDetailsComponent } from './components/hero-card/components/person-card-details/person-card-details.component';
+import { StarshipCardDetailsComponent } from './components/hero-card/components/starship-card-details/starship-card-details.component';
 
 
 
@@ -18,7 +20,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     GameComponent,
     HeroCardGridComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    PersonCardDetailsComponent,
+    StarshipCardDetailsComponent
   ],
   imports: [
     GameRoutingModule,

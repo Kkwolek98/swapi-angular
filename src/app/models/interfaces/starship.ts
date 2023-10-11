@@ -1,4 +1,5 @@
 export interface Starship {
+  type: 'starship';
   name: string;
   model: string;
   manufacturer: string;

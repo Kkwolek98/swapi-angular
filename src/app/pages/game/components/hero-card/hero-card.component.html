@@ -5,27 +5,19 @@
   "
 >
   <mat-card-header>
-    <mat-card-title> {{ person.name }} </mat-card-title>
-    <mat-card-subtitle> {{ person.mass }} </mat-card-subtitle>
+    <mat-card-title> {{ entity.name }} </mat-card-title>
+    <mat-card-subtitle> {{ entity.power }} </mat-card-subtitle>
   </mat-card-header>
   <ng-container *ngIf="!limited">
     <mat-card-content>
-      <div class="row">
-        <div class="col-6 fw-bold">Gender:</div>
-        <div class="col-6 text-end">{{ person.gender }}</div>
-      </div>
-      <div class="row">
-        <div class="col-6 fw-bold">Birth year:</div>
-        <div class="col-6 text-end">{{ person.birth_year }}</div>
-      </div>
-      <div class="row">
-        <div class="col-6 fw-bold">Height:</div>
-        <div class="col-6 text-end">{{ person.height }}</div>
-      </div>
-      <div class="row">
-        <div class="col-6 fw-bold">Eye color:</div>
-        <div class="col-6 text-end">{{ person.eye_color }}</div>
-      </div>
+      <app-person-card-details
+        *ngIf="entity.type === 'person'"
+        [person]="entity"
+      ></app-person-card-details>
+      <app-starship-card-details
+        *ngIf="entity.type === 'starship'"
+        [starship]="entity"
+      ></app-starship-card-details>
     </mat-card-content>
     <mat-card-actions>
       <button

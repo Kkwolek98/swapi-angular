@@ -1,28 +1,28 @@
 import { Injectable } from "@angular/core";
 import { Action, NgxsOnInit, Selector, State, StateContext } from "@ngxs/store";
-import { Person } from "../models/interfaces/person";
 import { StoreModel } from "../models/interfaces/store-model";
 import { SwapiHttpService } from "../services/swapi-http.service";
 import { tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { SwapiResponse } from "../models/interfaces/swapi-response";
+import { Starship } from "../models/interfaces/starship";
 
-export type PeopleStoreModel = StoreModel<Person>;
+export type StarshipStoreModel = StoreModel<Starship>;
 
-export class FetchPeople {
-  static readonly type = '[people] FetchPeople'
+export class FetchStarships {
+  static readonly type = '[starships] FetchStarships'
 }
 
-export class FetchPeopleNext {
-  static readonly type = '[people] FetchPeopleNext'
+export class FetchStarshipsNext {
+  static readonly type = '[starships] FetchStarshipsNext'
 }
 
-export class FetchPeoplePrevious {
-  static readonly type = '[people] FetchPeoplePrevious'
+export class FetchStarshipsPrevious {
+  static readonly type = '[starships] FetchStarshipsPrevious'
 }
 
-@State<PeopleStoreModel>({
-  name: 'people',
+@State<StarshipStoreModel>({
+  name: 'starships',
   defaults: {
     allResults: [],
     currentPage: [],
@@ -32,10 +32,10 @@ export class FetchPeoplePrevious {
   }
 })
 @Injectable()
-export class PeopleStore implements NgxsOnInit {
+export class StarshipsStore implements NgxsOnInit {
 
   @Selector()
-  static currentPage(state: PeopleStoreModel): Person[] {
+  static currentPage(state: StarshipStoreModel): Starship[] {
     return state.currentPage;
   }
 
@@ -44,55 +44,55 @@ export class PeopleStore implements NgxsOnInit {
     private http: HttpClient
   ) { }
 
-  ngxsOnInit(ctx: StateContext<PeopleStoreModel>): void {
-    console.log('Fetching people...')
-    ctx.dispatch(new FetchPeople());
+  ngxsOnInit(ctx: StateContext<StarshipStoreModel>): void {
+    console.log('Fetching starships...')
+    ctx.dispatch(new FetchStarships());
   }
 
-  @Action(FetchPeople)
-  fetchPeople(ctx: StateContext<PeopleStoreModel>) {
-    return this.swapiHttpService.getAllPeople$().pipe(
+  @Action(FetchStarships)
+  fetchStarships(ctx: StateContext<StarshipStoreModel>) {
+    return this.swapiHttpService.getAllStarships$().pipe(
       tap((res) => {
         res.results.forEach((el) => {
-          el.power = +el.mass;
-          el.type = 'person';
+          el.power = +el.crew;
+          el.type = 'starship';
         });
         this.patchState(ctx, res);
       })
     );
   }
 
-  @Action(FetchPeopleNext)
-  fetchNext(ctx: StateContext<PeopleStoreModel>) {
+  @Action(FetchStarshipsNext)
+  fetchNext(ctx: StateContext<StarshipStoreModel>) {
     const state = ctx.getState();
 
     if (!state.next) {
       throw new Error('No url for next page');
     }
 
-    return this.http.get<SwapiResponse<Person>>(state.next).pipe(
+    return this.http.get<SwapiResponse<Starship>>(state.next).pipe(
       tap((res) => {
         this.patchState(ctx, res);
       })
     );
   }
 
-  @Action(FetchPeoplePrevious)
-  fetchPrevious(ctx: StateContext<PeopleStoreModel>) {
+  @Action(FetchStarshipsPrevious)
+  fetchPrevious(ctx: StateContext<StarshipStoreModel>) {
     const state = ctx.getState();
 
     if (!state.previous) {
       throw new Error('No url for previous page');
     }
 
-    return this.http.get<SwapiResponse<Person>>(state.previous).pipe(
+    return this.http.get<SwapiResponse<Starship>>(state.previous).pipe(
       tap((res) => {
         this.patchState(ctx, res);
       })
     );
   }
 
-  patchState(ctx: StateContext<PeopleStoreModel>, res: SwapiResponse<Person>) {
+  patchState(ctx: StateContext<StarshipStoreModel>, res: SwapiResponse<Starship>) {
     ctx.patchState({
       allResults: res.results, // TODO: merge results
       currentPage: res.results,

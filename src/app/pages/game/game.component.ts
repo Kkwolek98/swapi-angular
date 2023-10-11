@@ -5,6 +5,7 @@ import { Observable, combineLatest, map } from 'rxjs';
 import { Person } from '../../models/interfaces/person';
 import { GameNextRound, GameStart, GameStore } from '../../stores/game.store';
 import { Starship } from '../../models/interfaces/starship';
+import { StarshipsStore } from 'src/app/stores/starships.store';
 
 @Component({
   selector: 'app-game',
@@ -14,6 +15,7 @@ import { Starship } from '../../models/interfaces/starship';
 })
 export class GameComponent {
   @Select(PeopleStore.currentPage) people$?: Observable<Person[]>;
+  @Select(StarshipsStore.currentPage) starships$?: Observable<Person[]>;
   @Select(GameStore.started) isGameStarted$?: Observable<boolean>;
   @Select(GameStore.playerPoints) playerPoints$?: Observable<number>;
   @Select(GameStore.cpuPoints) cpuPoints$?: Observable<number>;

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxsModule } from '@ngxs/store';
 import { PeopleStore } from './stores/people.store';
+import { StarshipsStore } from './stores/starships.store';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PeopleStore } from './stores/people.store';
     HttpClientModule,
     NgxsModule.forRoot(
       [
-        PeopleStore
+        PeopleStore,
+        StarshipsStore
       ]
     ),
   ],
